@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.kmp.pokemon.HomeRoute
 import br.com.kmp.pokemon.LocalNavController
-import br.com.kmp.pokemon.presentation.splash.SplashActions
+import br.com.kmp.pokemon.presentation.splash.SplashAction
 import br.com.kmp.pokemon.presentation.splash.SplashEvent
 import br.com.kmp.pokemon.presentation.splash.SplashViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -33,9 +33,9 @@ fun SplashScreen(viewModel: SplashViewModel = koinViewModel()) {
     val navController = LocalNavController.current
 
     LaunchedEffect(Unit) {
-        viewModel.actions.collect {
+        viewModel.action.collect {
             when (it) {
-                SplashActions.SuccessFetch -> navController.navigate(HomeRoute) {
+                SplashAction.SuccessFetch -> navController.navigate(HomeRoute) {
                     popUpTo(0)
                 }
             }

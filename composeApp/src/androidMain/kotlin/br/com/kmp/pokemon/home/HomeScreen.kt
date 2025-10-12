@@ -57,7 +57,6 @@ internal fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
                 }
 
             }
-
         }
     }
 }
