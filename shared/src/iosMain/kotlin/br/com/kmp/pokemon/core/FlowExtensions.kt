@@ -1,7 +1,6 @@
 package br.com.kmp.pokemon.core
 
 import br.com.kmp.pokemon.core.viewmodel.BaseViewModel
-import br.com.kmp.pokemon.presentation.home.HomeViewModel
 import io.ktor.utils.io.core.Closeable
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
