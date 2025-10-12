@@ -8,6 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import br.com.kmp.pokemon.domain.model.PokemonModel
 import br.com.kmp.pokemon.home.HomeScreen
 import br.com.kmp.pokemon.splash.SplashScreen
 import kotlinx.serialization.Serializable
@@ -23,6 +25,9 @@ object SplashRoute
 @Serializable
 object HomeRoute
 
+@Serializable
+data class DetailsRoute(val pokemonModel: PokemonModel)
+
 @Composable
 @Preview
 fun App() {
@@ -34,6 +39,10 @@ fun App() {
             NavHost(navController = navController, startDestination = SplashRoute) {
                 composable<SplashRoute> { SplashScreen() }
                 composable<HomeRoute> { HomeScreen() }
+                composable<DetailsRoute> { backStackEntry ->
+                    val args = backStackEntry.toRoute<DetailsRoute>()
+
+                }
             }
         }
 

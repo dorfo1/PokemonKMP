@@ -1,7 +1,9 @@
 package br.com.kmp.pokemon.domain.model
 
 import br.com.kmp.pokemon.domain.enums.PokemonType
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PokemonModel(
     val id: Int,
     val baseExperience: Int,

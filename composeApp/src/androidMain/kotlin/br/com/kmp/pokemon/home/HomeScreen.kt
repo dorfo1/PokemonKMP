@@ -1,5 +1,6 @@
 package br.com.kmp.pokemon.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -16,11 +17,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.kmp.pokemon.LocalNavController
+import br.com.kmp.pokemon.presentation.home.HomeAction
+import br.com.kmp.pokemon.presentation.home.HomeEvent
 import br.com.kmp.pokemon.presentation.home.HomeViewModel
 import coil.compose.AsyncImage
 import org.koin.compose.viewmodel.koinViewModel
@@ -29,6 +34,15 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 internal fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val navController = LocalNavController.current
+
+    LaunchedEffect(Unit) {
+        viewModel.action.collect { action ->
+            when(action) {
+                is HomeAction.OnGoToDetails -> {}
+            }
+        }
+    }
 
     Scaffold(
         topBar = { TopAppBar(title = { Text("Pokemons") }) }
@@ -43,7 +57,8 @@ internal fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp),
+                            .padding(vertical = 8.dp)
+                            .clickable { viewModel.onEvent(HomeEvent.GoToDetails(pokemon)) },
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         AsyncImage(
