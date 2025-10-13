@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.kmp.pokemon.DetailsRoute
 import br.com.kmp.pokemon.LocalNavController
 import br.com.kmp.pokemon.presentation.home.HomeAction
 import br.com.kmp.pokemon.presentation.home.HomeEvent
@@ -38,8 +39,8 @@ internal fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
     LaunchedEffect(Unit) {
         viewModel.action.collect { action ->
-            when(action) {
-                is HomeAction.OnGoToDetails -> {}
+            when (action) {
+                is HomeAction.OnGoToDetails -> navController.navigate(DetailsRoute(action.pokemon.id))
             }
         }
     }
@@ -57,8 +58,8 @@ internal fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp)
-                            .clickable { viewModel.onEvent(HomeEvent.GoToDetails(pokemon)) },
+                            .clickable { viewModel.onEvent(HomeEvent.GoToDetails(pokemon)) }
+                            .padding(vertical = 8.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         AsyncImage(
@@ -67,7 +68,7 @@ internal fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
                             contentDescription = null
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text(pokemon.name)
+                        Text(pokemon.name.capitalize())
                     }
                 }
 

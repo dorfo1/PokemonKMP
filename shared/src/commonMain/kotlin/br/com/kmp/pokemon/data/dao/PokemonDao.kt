@@ -18,4 +18,8 @@ interface PokemonDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM Pokemon)")
     suspend fun hasPokemons(): Boolean
+
+    @Query("SELECT * FROM Pokemon WHERE id = :id LIMIT 1")
+    suspend fun getPokemonById(id: Int): PokemonEntity
+
 }

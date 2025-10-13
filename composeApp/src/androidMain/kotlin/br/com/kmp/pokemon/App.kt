@@ -9,11 +9,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import br.com.kmp.pokemon.domain.model.PokemonModel
+import br.com.kmp.pokemon.details.PokemonDetailsScreen
 import br.com.kmp.pokemon.home.HomeScreen
 import br.com.kmp.pokemon.splash.SplashScreen
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 val LocalNavController = compositionLocalOf<NavHostController> {
     error("CompositionLocal LocalNavController not present")
@@ -26,7 +28,7 @@ object SplashRoute
 object HomeRoute
 
 @Serializable
-data class DetailsRoute(val pokemonModel: PokemonModel)
+data class DetailsRoute(val pokemonId: Int)
 
 @Composable
 @Preview
@@ -42,6 +44,8 @@ fun App() {
                 composable<DetailsRoute> { backStackEntry ->
                     val args = backStackEntry.toRoute<DetailsRoute>()
 
+
+                    PokemonDetailsScreen(viewModel = koinViewModel { parametersOf(args.pokemonId) })
                 }
             }
         }

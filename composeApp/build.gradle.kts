@@ -17,7 +17,7 @@ kotlin {
     
     sourceSets {
         androidMain.dependencies {
-            implementation("androidx.navigation:navigation-compose:2.9.5") // versão mais recente até outubro/2025
+            implementation("androidx.navigation:navigation-compose:2.9.5")
 
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)

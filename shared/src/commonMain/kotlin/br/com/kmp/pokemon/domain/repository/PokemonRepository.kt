@@ -9,6 +9,8 @@ interface PokemonRepository {
 
     suspend fun getPokemons(): List<PokemonEntity>
 
+    suspend fun getPokemonById(id : Int): PokemonEntity
+
     suspend fun savePokemons(pokemons: List<PokemonEntity>)
 
     suspend fun hasPokemons(): Boolean

@@ -32,4 +32,8 @@ internal class PokemonRepositoryImpl(
     override suspend fun getPokemons(): List<PokemonEntity> {
         return pokemonDao.getPokemons()
     }
+
+    override suspend fun getPokemonById(id : Int): PokemonEntity {
+        return pokemonDao.getPokemonById(id)
+    }
 }
